@@ -1,4 +1,4 @@
-name: Build and Deploy to AWS
+name: CI/CD Pipeline
 
 env:
   GO_VERSION: '1.21'
