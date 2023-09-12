@@ -26,7 +26,7 @@ jobs:
         with:
           command: cp
           source: ./links-app.zip
-          destination: s3://lambda-link/links-app.zip
+          destination: s3://functions-uploads/links-app.zip
           aws_access_key_id: ${{ secrets.ACCESS_KEY }}
           aws_secret_access_key: ${{ secrets.ACCESS_KEY_SECRET }}
           aws_region: us-east-2
