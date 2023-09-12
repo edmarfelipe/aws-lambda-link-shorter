@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/apex/gateway"
+	"github.com/apex/gateway/v2"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/edmarfelipe/aws-lambda/handler/createlink"
 	"github.com/edmarfelipe/aws-lambda/handler/redirectlink"

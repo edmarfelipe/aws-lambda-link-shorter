@@ -26,6 +26,11 @@ Resources:
       ProtocolType: HTTP
       Target: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunction}/invocations
 
+  HttpApiLogGroup:
+    Type: 'AWS::Logs::LogGroup'
+    Properties:
+      LogGroupName: !Sub '/aws/apigateway/${AppName}'
+
   LambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
