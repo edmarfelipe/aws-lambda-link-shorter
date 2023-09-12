@@ -24,6 +24,7 @@ jobs:
 
       - uses: keithweaver/aws-s3-github-action@v1.0.0
         with:
+          command: cp
           source: ./links-app.zip
           destination: s3://lambda-link/links-app.zip
           aws_access_key_id: ${{ secrets.ACCESS_KEY }}
