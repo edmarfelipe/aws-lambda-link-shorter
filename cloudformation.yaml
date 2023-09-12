@@ -31,7 +31,7 @@ Resources:
     Properties:
       FunctionName: !Sub '${AppName}-function'
       Runtime: provided.al2
-      CodeUri: links-app.zip
+      CodeUri: s3://lambda-link/links-app.zip
       Handler: bootstrap
       Architectures:
         - arm64

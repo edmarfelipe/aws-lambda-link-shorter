@@ -1,6 +1,7 @@
 package createlink_test
 
 import (
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -66,6 +67,20 @@ func TestCreateLink(t *testing.T) {
 
 	t.Run("Should return an error if body is invalid", func(t *testing.T) {
 		body := ``
+		req, err := http.NewRequest(http.MethodPost, "/", strings.NewReader(body))
+		assert.NoError(t, err)
+
+		rr := httptest.NewRecorder()
+		handler.ServeHTTP(rr, req)
+
+		assert.Equal(t, http.StatusInternalServerError, rr.Code)
+		assert.JSONEq(t, `{"message":"internal server error"}`, rr.Body.String())
+	})
+
+	t.Run("Should return an error if fail to create a link", func(t *testing.T) {
+		linkStorageMock.On("Create", storage.Link{Hash: "FnoLIXda", Title: "My Link", Original: "https://www.mylink.com"}).Return(errors.New("unknown error"))
+
+		body := `{"title":"My Link","link":"https://www.mylink.com"}`
 		req, err := http.NewRequest(http.MethodPost, "/", strings.NewReader(body))
 		assert.NoError(t, err)
 

@@ -24,18 +24,30 @@ func TestLinkStorage(t *testing.T) {
 	err := linkStorage.CreateTable(context.Background())
 	assert.NoError(t, err)
 
-	link := storage.Link{
-		Original: "https://www.google.com",
-		Title:    "Google",
-		Hash:     "123",
-	}
+	t.Run("Should create a link", func(t *testing.T) {
+		link := storage.Link{
+			Original: "https://www.google.com",
+			Title:    "Google",
+			Hash:     "123",
+		}
 
-	err = linkStorage.Create(context.Background(), link)
-	assert.NoError(t, err)
+		err = linkStorage.Create(context.Background(), link)
+		assert.NoError(t, err)
 
-	result, err := linkStorage.GetLinkByHash(context.Background(), "123")
-	assert.NoError(t, err)
-	assert.Equal(t, link, result)
+		result, err := linkStorage.GetLinkByHash(context.Background(), "123")
+		assert.NoError(t, err)
+		assert.Equal(t, link, result)
+	})
+
+	t.Run("Should return error when link not found", func(t *testing.T) {
+		_, err := linkStorage.GetLinkByHash(context.Background(), "444")
+		assert.EqualError(t, err, storage.ErrLinkNotFound.Error())
+	})
+
+	t.Run("Should return error when no hash is provided", func(t *testing.T) {
+		_, err := linkStorage.GetLinkByHash(context.Background(), "")
+		assert.ErrorContains(t, err, "failed to scan Link")
+	})
 }
 
 func setup(ctx context.Context, t *testing.T) aws.Config {

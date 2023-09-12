@@ -67,7 +67,7 @@ func (lks *linkStorage) GetLinkByHash(ctx context.Context, hash string) (Link, e
 	if err != nil {
 		return Link{}, fmt.Errorf("failed to scan Link, %w", err)
 	}
-	if result == nil {
+	if result.Item == nil {
 		return Link{}, ErrLinkNotFound
 	}
 
