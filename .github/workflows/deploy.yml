@@ -26,9 +26,9 @@ jobs:
         with:
           source: ./links-app.zip
           destination: s3://lambda-link/links-app.zip
-         aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
-          aws-region: us-east-2
+          aws_access_key_id: ${{ secrets.ACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.ACCESS_KEY_SECRET }}
+          aws_region: us-east-2
 
   test:
     runs-on: ubuntu-latest
